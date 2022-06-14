@@ -1,0 +1,88 @@
+﻿<Page x:Class="gadelshin_a.PageEmployee"       
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:gadelshin_a"
+      xmlns:command="clr-namespace:gadelshin_a.Commands"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="502"
+	Title="PageEmployee">
+
+    <StackPanel Margin="3,3,0,0" Background="{StaticResource BackgroundWindowResourse}">
+        <Menu>
+            <MenuItem Header="Действие">
+                <MenuItem Header="Отменить" Command="Undo"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Создать" Command="New"></MenuItem>
+                <MenuItem Header="Редактировать" Command="command:DataCommands.Edit"></MenuItem>
+                <MenuItem Header="Сохранить" Command="Save"></MenuItem>
+                <MenuItem Header="Найти" Command="Find"/>
+                <Separator></Separator>
+                <MenuItem Header="Удалить" Command="command:DataCommands.Delete"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Отчёт"></MenuItem>
+        </Menu>
+        <ToolBar Name="ToolBar1" Margin="3">
+            <Button Name="undo" ToolTip="Отменить редактирование/создание" Margin="5,2,5,2">
+                <Image Source="images/undo_16x.png" Height="22" Width="38"/>
+            </Button>
+            <Button Name="add" ToolTip="Добавить нового сотрудника" Margin="5,2,5,2">
+                <Image Source="images/AddMark_10580.png" Height="22" Width="38"/>
+            </Button>
+            <Button Name="edit" Command="command:DataCommands.Edit" ToolTip="Редактировать" Margin="5,2,5,2">
+                <Image Source="images/PencilTool_206.ico" Height="22" Width="38"/>
+            </Button>
+            <Button Name="find" ToolTip="Поиск" Margin="5,2,5,2">
+                <Image Source="images/Find_5650.ico" Height="22" Width="38"/>
+            </Button>
+            <Button Name="save" ToolTip="Сохранение" Margin="5,2,5,2">
+                <Image Source="Images/save_6530.ico" Height="22" Width="38"/>
+            </Button>
+            <Button Name="edit_remove" Command="command:DataCommands.Delete" ToolTip="Закрыть" Margin="5,2,5,2">
+                <Image Source="Images/clearallrequests_8816.ico" Height="22" Width="38"/>
+            </Button>
+        </ToolBar>
+        <TextBlock Margin="5" > Список сотрудников</TextBlock>
+        <DataGrid Name="DataGridEmployee"
+                  ItemsSource="{Binding}"
+                  AutoGenerateColumns="False"
+                  MaxWidth="1000" MaxHeight="295"
+                  RowBackground="#FFE6D3EF"
+                  AlternatingRowBackground="#FC96CFD4"
+                  BorderBrush="#FF1F33EB"
+                  BorderThickness="3"
+                  RowHeight="25"
+                  Cursor="Hand"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False" Height="53">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Телефон"/>
+                <DataGridTextColumn Header="Электронная почта"/>
+                <DataGridComboBoxColumn Header="Должность" ItemsSource="{Binding Path=TitleID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="Дата рождения"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+    <Page.CommandBindings>
+        <CommandBinding Command="{x:Static command:DataCommands.Delete}" Executed="DeleteCommandBinding_Executed" CanExecute="DeleteCommandBinding_CanExecute"/>
+        <CommandBinding Command="Undo" Executed="UndoCommandBinding_Executed" CanExecute="UndoCommandBinding_CanExecute"/>
+        <CommandBinding Command="New" Executed="NewCommandBinding_Executed" CanExecute="NewCommandBinding_CanExecute"/>
+        <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed" CanExecute="SaveCommandBinding_CanExecute"/>
+        <CommandBinding Command="Find" Executed="FindCommandBinding_Executed" CanExecute="FindCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static command:DataCommands.Edit}" Executed="EditCommandBinding_Executed" CanExecute="EditCommandBinding_CanExecute"/>
+    </Page.CommandBindings>
+    <Page.Resources>
+        <DataTemplate x:Key="DateTemplate">
+            <TextBlock Text="{Binding BirstDate, StringFormat={}{0:MM\.}{0:yyyy}}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </DataTemplate>
+        <DataTemplate x:Key="EditingDateTemplate">
+            <DatePicker SelectedDate="{Binding BirstDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </DataTemplate>        
+    </Page.Resources>
+  
+</Page>

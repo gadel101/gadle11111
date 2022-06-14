@@ -1,0 +1,35 @@
+﻿<Page x:Class="gadelshin_a.PageMain"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:gadelshin_a"
+      mc:Ignorable="d"
+	Title="PageMain" Width="820" Height="669.375">
+
+    <StackPanel Background="{StaticResource BackgroundWindowResourse}" Height="669" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="820" RenderTransformOrigin="0.5,0.5">
+        <TextBlock Margin="25,30,25,5" FontSize="20">
+            Система внутреннего учета инвестиционной компании
+        </TextBlock>
+        <TextBlock Margin="25,30,5,5">
+            <Hyperlink NavigateUri="PageEmployee.xaml">Сотрудники</Hyperlink>
+        </TextBlock>
+        <TextBlock Margin="25,14,5,5">
+            <Hyperlink NavigateUri="PageClients.xaml">Клиенты</Hyperlink>
+        </TextBlock>
+        <TextBlock Margin="25,14,5,5">
+            <Hyperlink NavigateUri="PageEmployee.xaml">Договора</Hyperlink>
+        </TextBlock>
+        <TextBlock Margin="25,14,5,5">
+            <Hyperlink NavigateUri="PageEmployee.xaml">Ценные бумаги</Hyperlink>
+        </TextBlock>
+        <TextBlock Margin="25,14,5,5">
+            <Hyperlink NavigateUri="PageEmployee.xaml">Сделки</Hyperlink>
+        </TextBlock>
+        <TextBlock Margin="25,14,5,5">
+            <Hyperlink NavigateUri="PageEmployee.xaml">Справки</Hyperlink>
+        </TextBlock>
+        <Button Margin="25,15" Width="60" HorizontalAlignment="Left" 
+                Command="Close" >Выход</Button>
+    </StackPanel>
+</Page>
